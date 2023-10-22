@@ -9,24 +9,31 @@ using SpaDay6.Models;
 
 namespace SpaDay6.Controllers
 {
-    public class SpaController : Controller
+    public class UserController : Controller
     {
-
-
         // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpPost]
-        [Route("/spa")]
-        public IActionResult Menu(string skintype, string manipedi)
+        [HttpGet]
+        [Route("/user/add")]
+        public IActionResult Add()
         {
-            Client newClient = new Client(skintype, manipedi);
-            newClient.SetFacials(newClient.SkinType);
-            ViewBag.client = newClient;
             return View();
+        }
+
+        [HttpPost]
+        [Route("/user/add")]
+        public IActionResult SubmitAddUserForm(User newUser, string verify)
+        {
+            if (verify == newUser.Password)
+            {
+                return View("Index", newUser);
+            }
+
+            return View("Add");
         }
     }
 }
