@@ -26,15 +26,19 @@ namespace SpaDay6.Controllers
 
         [HttpPost]
         [Route("/user/add")]
-        public IActionResult SubmitAddUserForm(User newUser, string verify)
+        public IActionResult SubmitAddUserForm(User? newUser, string verify)
         {
-            if (verify == newUser.Password)
+            if (verify == newUser?.Password)
             {
                 return View("Index", newUser);
+                //ViewBag.n
+                //return View("Index");
             }
 
             return View("Add");
         }
+
+
     }
 }
 
